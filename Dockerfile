@@ -3,6 +3,8 @@ FROM node:lts-alpine AS build-stage
 
 WORKDIR /app
 
+RUN npm install -g pnpm
+
 COPY . .
 RUN pnpm install --frozen-lockfile && pnpm run build
 
