@@ -4,7 +4,7 @@ FROM node:lts-alpine AS build-stage
 WORKDIR /app
 
 COPY . .
-RUN npm ci && npm run build
+RUN pnpm install --frozen-lockfile && pnpm run build
 
 # production stage
 FROM nginx:stable-alpine AS production-stage
