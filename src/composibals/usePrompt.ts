@@ -14,7 +14,7 @@ const usePrompt = () => {
       },
       messages,
     }
-    const res = await fetch('/yandex-gpt-api/foundationModels/v1/completion', {
+    const res = await fetch('https://llm.api.cloud.yandex.net/foundationModels/v1/completion', {
       body: JSON.stringify(body),
       method: 'POST',
       headers: {
