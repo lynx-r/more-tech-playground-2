@@ -32,8 +32,10 @@ const useMySpeechSynthesis = () => {
       setTimeout(() => {
         synth = window.speechSynthesis
         const voices = synth.getVoices()
-        // TODO: fix !
-        voice.value = voices.find((voice) => voice.lang === 'ru-RU')
+        const voiceRu = voices.find((voice) => voice.lang === 'ru-RU')
+        if (voiceRu) {
+          voice.value = voiceRu
+        }
       }, 100)
     }
   })
