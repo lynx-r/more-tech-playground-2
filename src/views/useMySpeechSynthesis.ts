@@ -33,7 +33,7 @@ const useMySpeechSynthesis = () => {
         synth = window.speechSynthesis
         const voices = synth.getVoices()
         // TODO: fix !
-        voice.value = voices.find((voice) => voice.lang === 'ru-RU' && voice.name === 'Milena')!
+        voice.value = voices.find((voice) => voice.lang === 'ru-RU')
       }, 100)
     }
   })

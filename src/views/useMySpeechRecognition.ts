@@ -4,30 +4,29 @@ import { useSpeechRecognition } from '@vueuse/core'
 const useMySpeechRecognition = () => {
   const lang = shallowRef('ru')
 
-  const grammar = `#JSGF V1.0;`
+  // const grammar = `#JSGF V1.0;`
 
   const speech = useSpeechRecognition({
     lang,
     continuous: true,
   })
 
-  const color = shallowRef('transparent')
+  // const color = shallowRef('transparent')
 
-  if (speech.isSupported.value) {
-    // @ts-expect-error missing types
-    const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList
-    const speechRecognitionList = new SpeechGrammarList()
-    speechRecognitionList.addFromString(grammar, 1)
-    speech.recognition!.grammars = speechRecognitionList
-  }
+  // if (speech.isSupported.value) {
+  // const SpeechGrammarList = window.SpeechGrammarList || window.webkitSpeechGrammarList
+  // const speechRecognitionList = new SpeechGrammarList()
+  // speechRecognitionList.addFromString(grammar, 1)
+  // speech.recognition!.grammars = speechRecognitionList
+  // }
 
   function start() {
-    color.value = 'transparent'
+    // color.value = 'transparent'
     speech.result.value = ''
     speech.start()
   }
 
-  const { isListening, isSupported, stop, result } = speech
+  const { isListening, isFinal, isSupported, stop, result } = speech
 
   return {
     isSupported,
@@ -35,6 +34,7 @@ const useMySpeechRecognition = () => {
     result,
     start,
     isListening,
+    isFinal,
   }
 }
 

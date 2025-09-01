@@ -48,14 +48,14 @@ watch(isUserSpeak, (isUserSpeakLocal) => {
 </script>
 
 <template>
-  <div class="flex flex-col border-2 rounded-2xl border-gray-500 p-5">
+  <div class="flex flex-col border-2 rounded-2xl border-gray-500 p-5 mt-3">
     <div v-for="(message, index) of chat?.messages" :key="index" class="flex flex-col">
       <div v-if="message.aiMessage" class="">{{ message.aiMessage }}</div>
       <div v-if="message.userMessage" class="self-end">{{ message.userMessage }}</div>
     </div>
-    <!-- <p class="tag"> -->
-    <!-- {{ recognation.result }} -->
-    <!-- </p> -->
+    <p class="tag">
+      {{ recognation.result }}
+    </p>
     <button @click="onToggleDialog">
       <span v-if="isInit">Начать диалог</span>
       <span v-else-if="isUserSpeak">Продолжить</span>
