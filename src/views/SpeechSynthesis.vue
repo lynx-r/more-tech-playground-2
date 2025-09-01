@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import useMySpeechSynthesis from './useMySpeechSynthesis'
+import useMySpeechSynthesis from '../composibals/useMySpeechSynthesis'
 
 const { speech, textSegments, text, pause, play, stop } = useMySpeechSynthesis()
 </script>

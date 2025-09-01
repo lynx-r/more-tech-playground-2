@@ -3,7 +3,7 @@ import { computed, ref as deepRef, onMounted, shallowRef, watch } from 'vue'
 
 const useMySpeechSynthesis = () => {
   const voice = deepRef<SpeechSynthesisVoice>(undefined as unknown as SpeechSynthesisVoice)
-  const text = shallowRef('Раскажите о своем опыте на данной позиции.')
+  const text = shallowRef('')
 
   const boundaryStart = shallowRef(0)
   const boundaryEnd = shallowRef(0)

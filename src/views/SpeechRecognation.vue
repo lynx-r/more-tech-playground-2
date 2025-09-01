@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import useMySpeechRecognition from './useMySpeechRecognition'
+import useMySpeechRecognition from '../composibals/useMySpeechRecognition'
 
 const { isSupported, isListening, result, start, stop } = useMySpeechRecognition()
 </script>
