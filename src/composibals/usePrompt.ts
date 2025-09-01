@@ -1,33 +1,32 @@
 // import { default as prompt } from './prompt.json'
-import type { Chat } from '@/types'
+import type { ChatMessage } from '@/types'
 const usePrompt = () => {
-  const makePrompt = async (messages: Chat) => {
-    const _body = {
+  const makePrompt = async (messages: ChatMessage[]) => {
+    const body = {
       modelUri: 'gpt://b1g6v7j9nvt9dilshk76/yandexgpt',
       completionOptions: {
         stream: false,
-        temperature: 0.6,
-        maxTokens: '200',
+        temperature: 1,
+        maxTokens: '50',
         reasoningOptions: {
           mode: 'DISABLED',
         },
       },
       messages,
     }
-    // const res = await fetch('/yandex-gpt-api/foundationModels/v1/completion', {
-    //   body: JSON.stringify(body),
-    //   method: 'POST',
-    //   headers: {
-    //     Authorization: `Bearer ${import.meta.env.VITE_IAM_TOKEN}`,
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
+    const res = await fetch('/yandex-gpt-api/foundationModels/v1/completion', {
+      body: JSON.stringify(body),
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${import.meta.env.VITE_IAM_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+    })
+    const data = await res.json()
+    const responseMessage = data.result.alternatives[0].message
 
-    console.log(messages)
-    return {
-      role: 'assistant' as const,
-      text: 'Можно пожробнне про технологию X',
-    }
+    console.log(responseMessage)
+    return responseMessage
   }
 
   return {

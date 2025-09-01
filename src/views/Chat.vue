@@ -12,7 +12,9 @@ const chat = ref<Chat>({
   messages: [
     {
       role: 'system',
-      text: 'Проведи собеседование на позицию JavaScript разработчик',
+      text:
+        'Ты проводишь собеседование на позицию Vue.js разработчик. ' +
+        'Кандидата спращивают о его опыте.',
     },
   ],
 })
@@ -44,16 +46,16 @@ watch(isUserSpeak, async (isUser) => {
     recognation.stop()
     const text = recognation.result.value
     isUserSpeak.value = true
-    chat.value?.messages.push({ text, role: 'user' })
-    const aiResponse = await makePrompt(chat.value)
-    synthesis.text.value = aiResponse.text
-    synthesis.play()
-    chat.value.messages.push(aiResponse)
+    console.log(text)
+    if (text) {
+      chat.value?.messages.push({ text, role: 'user' })
+      const aiResponse = await makePrompt(chat.value.messages)
+      synthesis.text.value = aiResponse.text
+      synthesis.play()
+      chat.value.messages.push(aiResponse)
+    }
   }
 })
-
-const res = usePrompt()
-console.log(res)
 </script>
 
 <template>
@@ -62,9 +64,7 @@ console.log(res)
       <div v-if="message.role === 'assistant'" class="">{{ message.text }}</div>
       <div v-if="message.role === 'user'" class="self-end">{{ message.text }}</div>
     </div>
-    <p class="tag">
-      {{ recognation.result }}
-    </p>
+    <p v-if="recognation.result.value" class="tag">Распознанная речь: {{ recognation.result }}</p>
     <button v-if="isInit" @click="onStart">Начать диалог</button>
     <span v-else-if="isUserSpeak" @click="onToggleDialog">Продолжить</span>
   </div>
